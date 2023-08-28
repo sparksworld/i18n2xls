@@ -55,11 +55,7 @@ module.exports = {
     }),
     nodeResolve(),
 
-    typescript({
-      // sourceMap: !production,
-      // declarationMap: !production,
-      tsconfig: './tsconfig.json',
-    }),
+    typescript({ module: "ESNext" }),
 
     url({
       fileName: '[dirname][hash][extname]',

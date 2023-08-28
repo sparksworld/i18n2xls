@@ -4,7 +4,7 @@
     "declaration": true,
     "declarationDir": "types",
     "lib": ["ES2015", "DOM"],
-    "module": "ESNext",
+    "module": "CommonJS",
     "target": "es6",
     "composite": false,
     "declarationMap": true,
@@ -17,7 +17,7 @@
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
