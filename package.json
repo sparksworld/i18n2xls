@@ -1,0 +1,53 @@
+{
+  "name": "i18n2xls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/i18n2xls.cjs.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "dev": "rm -rf dist && rollup -c -w",
+    "build": "rm -rf dist && cross-env NODE_ENV=production rollup -c"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/plugin-transform-runtime": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-image": "^3.0.2",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.1",
+    "@rollup/plugin-url": "^8.0.1",
+    "@types/lodash": "^4.14.195",
+    "@types/node": "^16.18.37",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/rollup-plugin-peer-deps-external": "^2.2.1",
+    "@types/rollup-plugin-progress": "^1.1.1",
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.28",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.25.2",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-progress": "^1.1.2",
+    "typescript": "^5.1.6"
+  },
+  "keywords": [
+    "i18n2xls",
+    "i18n",
+    "execl"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json2xls": "^0.1.2",
+    "lodash": "^4.17.21",
+    "tslib": "^2.6.2"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "types",
+    "lib": ["ES2015", "DOM"],
+    "module": "ESNext",
+    "target": "es6",
+    "composite": false,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "strict": true,
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
