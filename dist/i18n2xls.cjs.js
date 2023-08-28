@@ -1,112 +1,51 @@
 'use strict';
 
 // import path from 'path'
-const fs = require('fs');
-const path = require('path');
-const json2xls = require('json2xls');
-console.log(json2xls);
-const commandPath = path.resolve(process.cwd(), './example');
-const readDir = () => {
-    let dirs = [];
-    const files = fs.readdirSync(commandPath);
-    files.forEach(function (item, index) {
-        const path = commandPath + '/' + item;
-        let stat = fs.lstatSync(path);
-        console.log(stat);
-        if (stat.isDirectory() === true) {
-            dirs.push({
-                name: item,
-                path: path,
-            });
-        }
-    });
-    return dirs;
+var fs = require('fs');
+var path = require('path');
+var json2xls = require('json2xls');
+var commandPath = path.resolve(process.cwd(), './example');
+var readDir = function readDir() {
+  var dirs = [];
+  var files = fs.readdirSync(commandPath);
+  files.forEach(function (item, index) {
+    var path = commandPath + '/' + item;
+    var stat = fs.lstatSync(path);
+    if (stat.isDirectory() === true) {
+      dirs.push({
+        name: item,
+        path: path,
+        data: require(path + "/resources.json")
+      });
+    }
+  });
+  return dirs;
 };
-const readFils = () => {
-    const dirs = readDir();
-    return dirs.map((item) => {
-        return Object.assign(Object.assign({}, item), { data: fs.readFileSync(`${item.path}/resources.json`, 'utf-8') });
-    });
+var getKey2Word = function getKey2Word(dirs, key) {
+  var obj = {};
+  dirs.forEach(function (item) {
+    var data = item.data;
+    var name = item.name;
+    var value = data[key] || '';
+    obj[name] = value;
+  });
+  return obj;
 };
-const xls = json2xls(readFils());
-fs.writeFileSync(`./json2xls.xlsx`, xls, 'binary');
-// console.log(readFils())
-// function getFiles(dir: string) {
-//   const stat = fs.statSync(dir)
-//   if (stat.isDirectory()) {
-//     //判断是不是目录
-//     const dirs = fs.readdirSync(dir)
-//     dirs.forEach((value) => {
-//       // console.log('路径',path.resolve(dir,value));
-//       getFiles(path.join(dir, value))
-//     })
-//   } else if (stat.isFile()) {
-//     //判断是不是文件
-//     console.log('文件名称', dir)
-//   }
-// }
-// console.log(dirs)
-// getFiles(commandPath)
-// /**
-//  * 读取文件
-//  * @param {*} language
-//  * @returns
-//  */
-// const rendFile = (project, language) => {
-//   const content = fs.readFileSync(`${__dirname}/translation.json`, 'utf-8')
-//   const json = JSON.parse(content)
-//   return json
-// }
-// /**
-//  * 获取文件数据
-//  * @param {*} project
-//  * @param {*} language
-//  * @returns
-//  */
-// const getFileData = (project, language) => {
-//   const json = rendFile(project, language)
-//   let map = new Map()
-//   if (json) {
-//     for (let key in json) {
-//       map.set(key, json[key])
-//     }
-//   }
-//   return map
-// }
-// /**
-//  * 生成excel
-//  * @param {*} project
-//  */
-// const generator = (project) => {
-//   const zh = getFileData(project, 'zh')
-//   const ko = getFileData(project, 'en')
-//   let omitArr = []
-//   zh.forEach((value, key) => {
-//     const data = zh.get(key)
-//     omitArr.push({
-//       单词: key,
-//       翻译: data || value,
-//     })
-//     // if(data){
-//     //   if(!value){
-//     //     omitArr.push({
-//     //       '单词':key,
-//     //       '翻译':value
-//     //     })
-//     //   }
-//     // }else{
-//     //   omitArr.push({
-//     //     '单词':key,
-//     //     '翻译':""
-//     //   })
-//     // }
-//   })
-//   if (omitArr.length) {
-//     const xls = json2xls(omitArr)
-//     fs.writeFileSync(`./词汇.xlsx`, xls, 'binary')
-//   }
-// }
-// config.projects.forEach((project) => {
-//   generator(project)
-// })
+var readFils = function readFils() {
+  var _a, _b;
+  var arr = [];
+  var languageWords = ((_b = (_a = readDir()) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.data) || {};
+  for (var key in languageWords) {
+    arr.push(Object.assign({
+      key: key
+    }, getKey2Word(readDir(), key)));
+  }
+  return arr;
+};
+var main = function main() {
+  var data = readFils();
+  var xls = json2xls(data);
+  fs.writeFileSync('i18n2xls.xlsx', xls, 'binary');
+};
+main();
 //# sourceMappingURL=i18n2xls.cjs.js.map

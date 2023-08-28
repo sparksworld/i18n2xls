@@ -1,4 +1,3 @@
-const _ = require('lodash')
 const path = require('path')
 const typescript = require('@rollup/plugin-typescript')
 const commonjs = require('@rollup/plugin-commonjs')
@@ -10,7 +9,7 @@ const json = require('@rollup/plugin-json')
 const postcss = require('rollup-plugin-postcss')
 // const peerDepsExternal = require('rollup-plugin-peer-deps-external')
 const progress = require('rollup-plugin-progress')
-const babel = require('@rollup/plugin-babel')
+const { babel } = require('@rollup/plugin-babel')
 const terser = require('@rollup/plugin-terser')
 const autoprefixer = require('autoprefixer')
 const cssnano = require('cssnano')
@@ -47,21 +46,20 @@ module.exports = {
     include: ['src/**'],
   },
   plugins: [
+    typescript({ module: 'ESNext' }),
+
+    nodeResolve(),
+    commonjs(),
     babel({
       exclude: /node_modules/,
-      babelHelpers: 'bundled',
-      presets: ['@babel/preset-env'],
-      plugins: ['@babel/plugin-transform-runtime'],
+      babelHelpers: 'runtime',
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
-    nodeResolve(),
-
-    typescript({ module: "ESNext" }),
 
     url({
       fileName: '[dirname][hash][extname]',
       sourceDir: path.join(__dirname, 'src'),
     }),
-    commonjs(),
     json(),
     progress(),
     production && terser(),
