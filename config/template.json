@@ -1,0 +1,8 @@
+{
+  "output": {
+    "path": "./i18n2xls",
+    "filename": "i18n2xls.xlsx"
+  },
+  "include": ["example/**"],
+  "sort": []
+}

@@ -55,7 +55,7 @@ module.exports = {
       babelHelpers: 'runtime',
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
-
+    postcss(rollPostcssConfig),
     url({
       fileName: '[dirname][hash][extname]',
       sourceDir: path.join(__dirname, 'src'),
